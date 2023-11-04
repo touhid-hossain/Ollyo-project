@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegImage } from "react-icons/fa";
 import GalleryHeader from "../GalleryHeader/GalleryHeader";
 import GalleryMainGridLayout from "../GalleryMainGridLayout/GalleryMainGridLayout";
@@ -18,19 +18,23 @@ import {
 import ForwardPhoto from "../Photo/Photo";
 import { galleryImages } from "../../assets/photos";
 
+// Only Initialize sort function when dragging 10px   💡 here!!!
+// This function is "Must_required" for avoiding input checkbox clicking problem.
 const GalleryMainLayout = () => {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
-      distance: 10, // Enable sort function when dragging 10px   💡 here!!!
+      distance: 10,
     },
   });
 
-  const [items, setItems] = useState(galleryImages);
+  const [items, setItems] = useState(galleryImages); //stores all the initial images
   const sensors = useSensors(mouseSensor);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]); //stores all the selected images ID
   const [activeId, setActiveId] = useState(null);
   const activeURL = items.find((photo) => photo.id === activeId)?.url;
+  const [isChecked, setIsChecked] = useState(false); //For the big CheckBox on top also referred as All_CheckBox
 
+  // Storing selected [ Gallery-Images ] in a state
   const onChange = (e) => {
     let isSelected = e.target.checked;
     let value = parseInt(e.target.value);
@@ -46,18 +50,38 @@ const GalleryMainLayout = () => {
     }
   };
 
+  //Removing selected Images from the gallery when Delete file is clicked
   const deleteSelectedImages = () => {
     setItems(items.filter((photo) => !selectedItems.includes(photo.id)));
     setSelectedItems([]);
   };
 
+  //Removing all selected images from unchecking from top!!
+  const removeAllCheckedPhotos = () => {
+    if (isChecked) {
+      setSelectedItems([]);
+    } else {
+      setIsChecked((prev) => !prev);
+    }
+  };
+
+  //Showing the all checkBox on top if one or more image is selected
+  useEffect(() => {
+    if (selectedItems.length > 0) {
+      setIsChecked(true);
+    }
+  }, [selectedItems]);
+
   return (
     <div className="container">
       <div className="gallery_wrapper">
-        {/* Gallery__Header -- Part */}
+        {/* Gallery__Dynamic-Header -- Part */}
         <GalleryHeader
           deleteSelectedImages={deleteSelectedImages}
+          removeAllCheckedPhotos={removeAllCheckedPhotos}
           selectedItems={selectedItems}
+          isChecked={isChecked}
+          items={items}
         />
         {/* Gallery__Main_layout -- Part */}
         <div className="grid_component grid_style">
@@ -73,13 +97,13 @@ const GalleryMainLayout = () => {
                   key={url}
                   url={url}
                   id={id}
+                  activeId={activeId}
                   index={index}
                   selecteditems={selectedItems}
                   onChange={onChange}
                 />
               ))}
             </SortableContext>
-
             <DragOverlay adjustScale={true}>
               {activeId ? (
                 <ForwardPhoto
@@ -89,6 +113,7 @@ const GalleryMainLayout = () => {
                   key={activeURL}
                   selecteditems={selectedItems}
                   onChange={onChange}
+                  isDraggable={true} // Remove hover effect when dragging a component from one place to another
                 />
               ) : null}
             </DragOverlay>
@@ -103,7 +128,6 @@ const GalleryMainLayout = () => {
   );
 
   function handleDragStart(event) {
-    // console.log(e);
     setActiveId(event.active.id);
   }
 
@@ -120,7 +144,7 @@ const GalleryMainLayout = () => {
     }
     setActiveId(null);
   }
-  
+
   function handleDragCancel() {
     setActiveId(null);
   }

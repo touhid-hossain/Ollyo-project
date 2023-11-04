@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 
 const Photo = ({ url, id, index, faded, ...props }, ref) => {
-  const { selecteditems, onChange, style, listeners } = props;
-  // console.log(props);
+  const { selecteditems, onChange, style, listeners, isDraggable } = props;
+
   const inlineStyles = {
     opacity: faded ? "0.2" : "1",
     transformOrigin: "0 0",
@@ -21,12 +21,13 @@ const Photo = ({ url, id, index, faded, ...props }, ref) => {
   return (
     <div
       className={`image-container ${
-        index === 0 ? "conditional_image_size" : "default_image_size"
+        index === 0 ? "conditional_image_size" : "default_image_size" // Making the first image bigger than others On Drag!!
       } `}
       ref={ref}
       style={inlineStyles}
       {...listeners}
     >
+      {/* Showing Selected checkbox on image without hovering */}
       {selecteditems.includes(id) && (
         <div className="light_overlay">
           <input
@@ -40,7 +41,9 @@ const Photo = ({ url, id, index, faded, ...props }, ref) => {
         </div>
       )}
 
-      <div className="overlay">
+      {/* The overlay class is used for creating overlay on image hover */}
+      <div className={!isDraggable ? "overlay" : undefined}>
+        {/* Show Checkbox on image when the hovered*/}
         <input
           name="checkbox"
           className="custom-checkbox-for-all"
