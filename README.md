@@ -1,8 +1,6 @@
-# `Image-Gallery`
+# `Image-Gallery` || `Ollyo`
 
-## `Task given by: Ollyo`
-
-## Available Scripts
+### Available Scripts
 
 1. Git Clone : [https://github.com/touhid-hossain/Ollyo-project.git]
 2. cd to `React-Gallery `
@@ -10,9 +8,7 @@
 
 ## Live Link
 
-You can see the real-time gallery project from here: [https://ollyo-t-image-gallery.netlify.app/].
+You can see the gallery project here: [https://ollyo-t-image-gallery.netlify.app/].
 
-
-### Project-Demo
-
- <img src="./instruction_files/image-gallery-screenshot.png" width="100%" height="800px">
+## Project-Demo:
+ <img src="./instruction_files/image-gallery-screenshot.png" width="100%" height="700px">
