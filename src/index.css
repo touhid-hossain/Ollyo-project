@@ -1,13 +1,205 @@
-body {
+/* Imported Poppins fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,500&display=swap");
+
+/* RESET */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  /* --Dark-Blue: hsl(233, 26%, 24%);
+  --Lime-Green: hsl(136, 65%, 51%);
+  --Bright-Cyan: hsl(192, 70%, 51%);
+
+  --Grayish-Blue: hsl(233, 8%, 62%);
+  --Light-Grayish-Blue: hsl(220, 16%, 96%);
+  --Very-Light-Gray: hsl(0, 0%, 98%);
+  --White: hsl(0, 0%, 100%);
+
+  --linear-color: linear-gradient(
+      90deg, #31d35c 0%, #2bb7da 100%); */
+}
+
+body {
+  background-color: rgb(194, 217, 235);
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  max-width: 1520px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.gallery_wrapper {
+  width: 80%;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.delete_text {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(245, 79, 79);
+}
+
+.gallery_heading_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+  padding: 20px 40px;
+}
+
+.gallery_heading_text {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.gallery_text_changing_wrapper {
+  display: flex;
+}
+
+.selecting_heading_text {
+  display: flex;
+  gap: 10px;
+}
+
+.delete-button {
+  color: rgb(237, 71, 71);
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+.delete-button:hover {
+  text-decoration: underline;
+}
+
+.add_image_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 200px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  border-style: dashed;
+}
+
+.add_image_icon {
+  font-size: 25px;
+}
+
+.add_image_text {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.conditional_image_size {
+  width: 100%;
+  height: 420px;
+}
+.default_image_size {
+  width: 100%;
+  height: 200px;
+}
+
+.overlay {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s; /* Add a smooth transition effect */
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.light_overlay {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(226, 226, 226, 0.5);
+  opacity: 1; /* Initially hidden */
+  transition: opacity 0.3s; /* Add a smooth transition effect */
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.image-container:hover {
+  cursor: grab;
+}
+.image-container:hover .overlay {
+  opacity: 1; /* Show the overlay on hover */
+}
+
+.custom-checkbox-for-all {
+  cursor: pointer;
+  transform: scale(1.5);
+  margin-top: 25px;
+  margin-left: 25px;
+  pointer-events: auto;
+}
+
+.grid_style {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 40px;
+}
+
+@media (max-width: 1024px) {
+  .gallery_wrapper {
+    width: 95%;
+    margin: 40px 10px;
+  }
+  .grid_style {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery_wrapper {
+    width: 95%;
+    margin: 40px 10px;
+  }
+  .grid_style {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 375px) {
+  .gallery_wrapper {
+    width: 100%;
+    margin: 40px 0px;
+  }
+  .grid_style {
+    grid-template-columns: 1fr;
+  }
 }
