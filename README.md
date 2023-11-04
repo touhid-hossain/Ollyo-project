@@ -1,4 +1,4 @@
-# `Image Gallery || Task given by : Ollyo`
+# `Image-Gallery || Task given by: Ollyo`
 
 ## Available Scripts
 1. Git Clone : [https://github.com/touhid-hossain/Ollyo-project.git]
