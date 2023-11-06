@@ -2,7 +2,7 @@
 
 ### Available Scripts
 
-1. Git Clone : [https://github.com/touhid-hossain/Ollyo-project.git]
+1. git clone : [https://github.com/touhid-hossain/Ollyo-project.git]
 2. cd to `React-Gallery `
 3. `npm start`
 
